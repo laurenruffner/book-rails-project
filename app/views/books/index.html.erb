@@ -1,0 +1,40 @@
+<% if !flash[:notice].blank? %>
+    <%= flash[:notice] %>
+<%end%>
+
+<h1>Books Homepage</h1>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+<%= link_to("Add New Book", new_book_path, :action => 'new') %>
+
+<h2> Books </h2>
+<p> Bellow includes of the books added </p>
+<table style="width:100%">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Price</th>
+        <th>Published Date</th>
+        <th>Actions</th>
+    </tr>
+    <%for x in @books%>
+        <tr >
+            <td><%= x.title%></td>
+            <td><%= x.author%></td>
+            <td><%= x.genre%></td>
+            <td><%= x.price%></td>
+            <td><%= x.published_date.strftime("%Y-%m-%d")%>
+            <td class = "actions">
+                <%= link_to("Show Details",book_path(x), :class => 'action show')%>
+                <%= link_to("Edit Book", edit_book_path(x), :class => 'action edit')%>
+                <%= link_to("Delete Book", delete_book_path(x), :class => 'action delete')%>
+            </td>    
+        </tr>
+    <%end%>
+</table> 
